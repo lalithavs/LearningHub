@@ -1,0 +1,68 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Search Form</h1>
+</mat-toolbar>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <mat-card class="form-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Role</mat-label>
+            <mat-select placeholder="Role" formControlName="role" #role>
+              <mat-option value="Teacher">
+                Teacher
+              </mat-option>
+              <mat-option value="Student">
+                Student
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="searchForm.controls['role'].hasError('required')">
+              Role is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Student's Admission # / Teacher's ID
+            </mat-label>
+            <input
+              matInput
+              placeholder="Student's Admission # / Teacher's ID"
+              formControlName="search"
+            />
+            <span matSuffix>@school.com</span>
+            <mat-hint>
+              Enter just the value. "@school.com" will be suffixed
+              automatically.
+            </mat-hint>
+            <mat-error
+              *ngIf="searchForm.controls['search'].hasError('required')"
+            >
+              <strong>Required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="searchForm.invalid"
+      >
+        Submit
+      </button>
+      <button mat-raised-button color="warn" type="reset">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

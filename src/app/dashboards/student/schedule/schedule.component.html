@@ -1,0 +1,40 @@
+<div class="mat-elevation-z8">
+  <mat-toolbar>
+    <h1 class="mat-h1">Schedule</h1>
+  </mat-toolbar>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-card>
+    <mat-card-subtitle *ngIf="!isLoading">
+      The following is the list of all the class schedules posted by all the
+      teachers. Please go through the schedule that concerns you.
+    </mat-card-subtitle>
+  </mat-card>
+  <mat-accordion *ngIf="posts.length > 0 && !isLoading">
+    <mat-expansion-panel *ngFor="let post of posts">
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ post.day }} | {{ post.time }} </mat-panel-title>
+        <mat-panel-description>
+          Class: {{ post.standard }} | Subject: {{ post.subject }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Online class link: {{ post.link }}</p>
+      <!-- <mat-action-row *ngIf="userIsAuthenticated">
+      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">
+        DELETE
+      </button>
+    </mat-action-row> -->
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-paginator
+    color="accent"
+    [length]="totalPosts"
+    [pageSize]="postsPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)"
+    *ngIf="posts.length > 0"
+  ></mat-paginator>
+  <p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">
+    No posts added yet!
+  </p>
+</div>

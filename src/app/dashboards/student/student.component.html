@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Student Dashboard</h1>
+</mat-toolbar>
+<div class="grid-container">
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+      <mat-list>
+        <div mat-subheader>View Details</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>table_view</mat-icon>
+          <a mat-list-item routerLink="viewSchedule">
+            View Schedule
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>table_view</mat-icon>
+          <a mat-list-item routerLink="viewNotes">
+            View Class Notes
+          </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Student Home</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>home</mat-icon>
+          <a mat-list-item routerLink="/student">
+            Student Home
+          </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

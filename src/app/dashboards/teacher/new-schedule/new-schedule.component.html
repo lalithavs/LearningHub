@@ -1,0 +1,109 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Create New Schedule</h1>
+</mat-toolbar>
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+  <mat-card class="form-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Class</mat-label>
+            <mat-select placeholder="Class" formControlName="standard">
+              <mat-option *ngFor="let c of classes" [value]="c">
+                {{ c }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="scheduleForm.controls['standard'].hasError('required')"
+            >
+              Class is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Day</mat-label>
+            <mat-select placeholder="Day" formControlName="day">
+              <mat-option *ngFor="let d of days" [value]="d">
+                {{ d }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="scheduleForm.controls['day'].hasError('required')"
+            >
+              Day is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Time</mat-label>
+            <mat-select placeholder="Time" formControlName="time">
+              <mat-option *ngFor="let t of timings" [value]="t">
+                {{ t }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="scheduleForm.controls['time'].hasError('required')"
+            >
+              Time is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Subject</mat-label>
+            <mat-select placeholder="Subject" formControlName="subject">
+              <mat-option *ngFor="let s of subjects" [value]="s">
+                {{ s }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="scheduleForm.controls['subject'].hasError('required')"
+            >
+              Subject is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width" appearance="outline" color="accent">
+          <mat-label>Class Link</mat-label>
+          <input matInput placeholder="Class link" formControlName="link" />
+          <mat-error *ngIf="scheduleForm.controls['link'].hasError('required')">
+            Class link is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="scheduleForm.invalid"
+      >
+        Submit
+      </button>
+      <button mat-raised-button color="warn" type="reset">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

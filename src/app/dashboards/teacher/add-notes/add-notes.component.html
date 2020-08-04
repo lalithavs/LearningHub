@@ -1,0 +1,92 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Class Notes Form</h1>
+</mat-toolbar>
+<form [formGroup]="notesForm" (ngSubmit)="onSubmit()">
+  <mat-card class="form-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Class</mat-label>
+            <mat-select placeholder="Class" formControlName="standard">
+              <mat-option *ngFor="let c of classes" [value]="c">
+                {{ c }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="notesForm.controls['standard'].hasError('required')"
+            >
+              Class is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Subject</mat-label>
+            <mat-select placeholder="State" formControlName="subject">
+              <mat-option *ngFor="let s of subjects" [value]="s">
+                {{ s }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="notesForm.controls['subject'].hasError('required')"
+            >
+              Subject is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Title" formControlName="title" />
+            <mat-error *ngIf="notesForm.controls['title'].hasError('required')">
+              Title is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>Notes</mat-label>
+            <textarea
+              matInput
+              placeholder="Notes"
+              formControlName="notes"
+            ></textarea>
+            <mat-error *ngIf="notesForm.controls['notes'].hasError('required')">
+              Notes <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="notesForm.invalid"
+      >
+        Submit
+      </button>
+      <button mat-raised-button color="warn" type="reset">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

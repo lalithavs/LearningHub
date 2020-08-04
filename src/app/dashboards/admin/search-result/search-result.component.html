@@ -1,0 +1,156 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Details</h1>
+</mat-toolbar>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card *ngIf="!isLoading">
+  <div *ngIf="userRole === 'Teacher'; then teacher; else student"></div>
+  <ng-template #teacher>
+    <mat-card-header>
+      <mat-card-title>Teacher Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list
+        cols="3"
+        rowHeight="fit"
+        [style.height]="'250px'"
+        [gutterSize]="'1px'"
+      >
+        <mat-grid-tile [colspan]="1" [rowspan]="1">Full Name</mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ userRole }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">Teacher ID</mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.teacherId }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Classes Handled
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.standards }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Subjects Taken
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.subjects }}
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </ng-template>
+  <ng-template #student>
+    <mat-card-header>
+      <mat-card-title>Student Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list
+        cols="3"
+        rowHeight="fit"
+        [style.height]="'500px'"
+        [gutterSize]="'1px'"
+      >
+        <mat-grid-tile [colspan]="1" [rowspan]="1">Full Name</mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.fullName }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Admission Number
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.admissionNumber }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Class
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.standard }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Date of Birth
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.dob | date: "fullDate" }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Gender
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.gender }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Mother's Name
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.motherName }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Father's Name
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.fatherName }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Address
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.address }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          City
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.city }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          State
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.state }}
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+          Postal Code
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          {{ user.postalCode }}
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </ng-template>
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onAttendance(user._id)"
+      [disabled]="attendanceDetails"
+    >
+      Attendance Details
+    </button>
+    <button mat-raised-button color="primary" (click)="onUpdate(user._id)">
+      Update
+    </button>
+    <button mat-raised-button color="warn" (click)="onDelete(user._id)">
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="attendanceDetails">
+  <mat-card-subtitle>
+    The following are the dates on which this user has marked attendance online.
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-grid-list
+      cols="5"
+      rowHeight="fit"
+      [style.height]="'100px'"
+      [gutterSize]="'1px'"
+    >
+      <mat-grid-tile
+        *ngFor="let content of attendanceContents"
+        [colspan]="1"
+        [rowspan]="1"
+      >
+        {{ content | date: "longDate" }}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

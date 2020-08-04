@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Teacher Home</h1>
+</mat-toolbar>
+<mat-card>
+  <mat-card-subtitle>
+    Please click the links on the left side nav to go to the respective modules.
+  </mat-card-subtitle>
+  <mat-divider></mat-divider>
+  <br />
+  <mat-card-content>
+    <span>Mark today's attendance: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!attendanceMarked"
+      (click)="onAttended()"
+    >
+      I'm Present
+    </button>
+  </mat-card-content>
+</mat-card>

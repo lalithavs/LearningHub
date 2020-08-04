@@ -1,0 +1,44 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Admin Dashboard</h1>
+</mat-toolbar>
+<div class="grid-container">
+  <mat-drawer-container>
+    <mat-drawer mode="side" opened>
+      <mat-list>
+        <div mat-subheader>
+          New
+        </div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>add</mat-icon>
+          <a mat-list-item routerLink="studentForm">
+            Add Student
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>add</mat-icon>
+          <a mat-list-item routerLink="teacherForm">Add Teacher</a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Search / View / Update / Delete</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>person_search</mat-icon>
+          <a mat-list-item routerLink="search">
+            Search Student / Teacher
+          </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Admin Home</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon>home</mat-icon>
+          <a mat-list-item routerLink="/admin">
+            Admin Home
+          </a>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

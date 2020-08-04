@@ -1,0 +1,74 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="false"
+    [ngClass]="{ hiddden: !(isHandset$ | async) }"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'open' : 'side'"
+    [opened]="(isHandset$ | async) === true"
+  >
+    <mat-toolbar> </mat-toolbar>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/login"
+        (click)="drawer.close()"
+        *ngIf="!userIsAuthenticated"
+      >
+        Login
+      </a>
+      <!-- <a
+        mat-list-item
+        routerLink="/signup"
+        (click)="drawer.close()"
+        *ngIf="!userIsAuthenticated"
+      >
+        Signup
+      </a> -->
+      <a
+        mat-list-item
+        (click)="drawer.close(); onLogout()"
+        *ngIf="userIsAuthenticated"
+      >
+        Logout
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="mat-elevation-z8">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a routerLink="/">e-Learning Hub</a>
+        <span class="spacer"></span>
+        <ul *ngIf="!(isHandset$ | async)">
+          <li *ngIf="!userIsAuthenticated">
+            <a mat-button routerLink="/login" routerLinkActive="mat-accent">
+              Login
+            </a>
+          </li>
+          <!-- <li *ngIf="!userIsAuthenticated">
+            <a mat-button routerLink="/signup" routerLinkActive="mat-accent">
+              Signup
+            </a>
+          </li> -->
+          <li *ngIf="userIsAuthenticated">
+            <button mat-button (click)="onLogout()">Logout</button>
+          </li>
+        </ul>
+      </mat-toolbar>
+    </div>
+    <!-- Add Content Here -->
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>

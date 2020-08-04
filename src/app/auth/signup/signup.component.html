@@ -1,0 +1,50 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Parent's Signup Form</h1>
+</mat-toolbar>
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="signupForm" (submit)="onSignup()" *ngIf="!isLoading">
+    <mat-form-field appearance="outline" color="accent">
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        placeholder="E-Mail"
+      />
+      <mat-error *ngIf="signupForm.get('email').invalid"
+        >Email not valid!</mat-error
+      >
+    </mat-form-field>
+    <div formGroupName="passwords">
+      <mat-form-field appearance="outline" color="accent">
+        <input
+          matInput
+          type="password"
+          formControlName="password1"
+          placeholder="Password"
+        />
+        <mat-error *ngIf="signupForm.get('passwords.password1').invalid"
+          >Password too short!</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="accent">
+        <input
+          matInput
+          type="password"
+          formControlName="password2"
+          placeholder="Password confirm"
+        />
+        <mat-error *ngIf="signupForm.get('passwords.password2').invalid"
+          >Password too short!</mat-error
+        >
+      </mat-form-field>
+      <mat-error *ngIf="checkPasswordMatch()">Passwords don't match!</mat-error>
+    </div>
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">
+      Signup
+    </button>
+    <button mat-raised-button color="warn" type="reset" *ngIf="!isLoading">
+      Reset
+    </button>
+  </form>
+</mat-card>

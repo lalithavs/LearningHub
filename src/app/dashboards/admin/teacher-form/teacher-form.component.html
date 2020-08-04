@@ -1,0 +1,142 @@
+<mat-toolbar>
+  <h1 class="mat-h1">Teacher Form</h1>
+</mat-toolbar>
+<form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+  <mat-card class="form-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Full name
+            </mat-label>
+            <input
+              matInput
+              placeholder="Full name"
+              formControlName="fullName"
+            />
+            <mat-error
+              *ngIf="teacherForm.controls['fullName'].hasError('required')"
+            >
+              Full name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Classes handled
+            </mat-label>
+            <mat-select
+              formControlName="standards"
+              placeholder="Classes handled"
+              multiple
+            >
+              <mat-option *ngFor="let c of classes" [value]="c">{{
+                c
+              }}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="teacherForm.controls['standards'].hasError('required')"
+            >
+              Classes handled is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Subject
+            </mat-label>
+            <mat-select
+              formControlName="subjects"
+              placeholder="Subjects"
+              multiple
+            >
+              <mat-option *ngFor="let s of subjectsList" [value]="s">{{
+                s
+              }}</mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="teacherForm.controls['subjects'].hasError('required')"
+            >
+              Subject is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Teacher ID
+            </mat-label>
+            <input
+              matInput
+              placeholder="Teacher ID"
+              formControlName="teacherId"
+            />
+            <span matSuffix>@school.com</span>
+            <mat-hint>
+              The teacher ID entered here will be suffixed with @school.com
+              automatically and will be the username for the teacher.
+            </mat-hint>
+            <mat-error
+              *ngIf="teacherForm.controls['teacherId'].hasError('required')"
+            >
+              Teacher ID is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field
+            class="full-width"
+            appearance="outline"
+            color="accent"
+          >
+            <mat-label>
+              Password
+            </mat-label>
+            <input matInput placeholder="Password" formControlName="password" />
+            <mat-error
+              *ngIf="teacherForm.controls['password'].hasError('required')"
+            >
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="teacherForm.invalid"
+      >
+        Submit
+      </button>
+      <button mat-raised-button color="warn" type="reset">
+        Reset
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
